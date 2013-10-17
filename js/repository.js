@@ -1,14 +1,14 @@
-jQuery(document).ready(function()
-{
-	//alert('ffff');
-	debugger;
-	window.hoStore.clearWhiteList();
-	window.hoStore.getWhiteList();
-	window.hoStore.addToWhiteList('someimage.png');
-	var u = window.hoStore.getWhiteList();	
-	alert(u);
+// jQuery(document).ready(function()
+// {
+// 	//alert('ffff');
+// 	//debugger;
+// 	window.hoStore.clearBlackList();
+// 	window.hoStore.getBlackList();
+// 	window.hoStore.addToBlackList('someimage.png');
+// 	var u = window.hoStore.getBlackList();	
+// 	alert(u);
 
-});
+// });
 
 (function (window) {
 
@@ -16,12 +16,12 @@ jQuery(document).ready(function()
 
     var hoStore = {
 
-		clearWhiteList : function () {
+		clearBlackList : function () {
 			var domain = 'general';
 			localStorage.removeItem(domain);
         },
 
-		getWhiteList:function()
+		getBlackList:function()
 		{	
 			var domain = 'general'; //document.domain;
 
@@ -30,10 +30,10 @@ jQuery(document).ready(function()
 		  	return val;
 		},
 
-		addToWhiteList:function(imageUrl)
+		addToBlackList:function(imageUrl)
 		{
 			var domain = 'general'; //document.domain;
-			var items = this.getWhiteList();
+			var items = this.getBlackList();
 			if (items.indexOf(imageUrl)<0)
 				items = items + ' ' + imageUrl;
 			
@@ -42,7 +42,7 @@ jQuery(document).ready(function()
 		},
 
 
-		removeFromWhiteList:function(imageUrl)	
+		removeFromBlackList:function(imageUrl)	
 		{//depricated
 			domain = document.domain;
 			chrome.storage.local.get('1',function(data) {

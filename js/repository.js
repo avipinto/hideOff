@@ -43,12 +43,14 @@
 
 
 		removeFromBlackList:function(imageUrl)	
-		{//depricated
-			domain = document.domain;
-			chrome.storage.local.get('1',function(data) {
-		    	// Notify that we saved.
-		    	//	(data.url);
-		  	});
+		{
+			var items = this.getBlackList();
+			if (items.indexOf(imageUrl)>=0)
+			{
+				items = items.replace(imageUrl,'');
+				localStorage.setItem(domain, items);
+			}
+			
 		}
     };
     window.hoStore = hoStore;

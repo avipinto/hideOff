@@ -33,9 +33,10 @@ function bindImageLink(imgEl)
 {
 	var self = imgEl;
 	var img = $(imgEl);
+	if(img.hasClass("hideOff-removedFromBlack")){return;}
 	var parentLink = img.parent("a");
 	hideFromBlackList(imgEl);
-	img.add(parentLink).on("click mousedown", function(event)
+	img.add(parentLink).on("click.hideOff mousedown.hideOff", function(event)
 	{
 		addToHideList(self);
 	});
@@ -68,17 +69,21 @@ function hideImge(imgEl)
 {
 
 	img = $(imgEl);
-	if(img.hasClass("hideOff-hide")){return;}
+	if(img.is(".hideOff-hide,.hideOff-removedFromBlack")){return;}
 
 	var wrap = $("<div class='hideOff-cont'></div>");
 	var show = $("<div class='hideOff-show' title='Show Again'></div>");
-	wrap.on("mouseenter",function(){$(this).find(".hideOff-show").show()});
-	wrap.on("mouseleave",function(){$(this).find(".hideOff-show").hide()});
+	wrap.on("mouseenter.hideOff",function(){$(this).find(".hideOff-show").show()});
+	wrap.on("mouseleave.hideOff",function(){$(this).find(".hideOff-show").hide()});
 	show.on("click",function()
 	{
-		$(this).siblings("img").removeClass("hideOff-hide");
+		var img = $(this).siblings("img");
+		img.addClass("hideOff-removedFromBlack").removeClass("hideOff-hide");
+		// console.log(img.attr("src"));
+		window.hoStore.removeFromBlackList(img.attr("src"));
 		$(this).remove();
-		window.hoStore.removeFromBlackList(imgEl.src);
+		img.off(".hideOff");
+		wrap.off(".hideOff");
 		return false;
 	});
 	wrap.width(img.width());

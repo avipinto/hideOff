@@ -13,7 +13,7 @@
 (function (window) {
 
     "use strict";
-
+	var domain = 'general'; //document.domain;
     var hoStore = {
 
 		clearBlackList : function () {
@@ -23,7 +23,7 @@
 
 		getBlackList:function()
 		{	
-			var domain = 'general'; //document.domain;
+			
 
 			var val = localStorage.getItem(domain) || '';
 			//alert('got:' + val + ' from ' + domain);

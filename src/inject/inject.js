@@ -5,34 +5,13 @@ chrome.extension.sendMessage({}, function(response) {
 	if (document.readyState === "complete") {
 		clearInterval(readyStateCheckInterval);
 		blackList = window.hoStore.getBlackList();
-		 // jQuery(document).on("mousedown","img",function(event)
-		 // 	{
-		 // 		//this.src = "";
-		 // 		$(this).css("opacity","0.2");
-		 // 	});
-
-		 // jQuery(document).on("mouseenter mousemove",".hideOff-cont",function(event)
-		 // 	{
-		 // 		//this.src = "";
-		 // 		$(this).find(".hideOff-show").show();
-		 // 	});
-		//$("img").on("mouseenter",function(event){this.src = "";});
-		
-		//  jQuery(document).on("click",".hideOff-show",function(event)
-		// {
-		// 	//this.src = "";
-		// 	alert("ddd");
-		// 	return false;
-		// });
-
-		//$("img").addClass("hideOff-hide");
 		
 		$("img").each(function()
 			{
 				hideFromBlackList(this);
-			}).click(function(event)
+			}).on("click mousedown", function(event)
 			{
-				addToHideList(this.src);
+				addToHideList(this);
 			});
 		//hideFromBlackList($(newEl));
 		var observer = new MutationSummary({
@@ -45,9 +24,17 @@ chrome.extension.sendMessage({}, function(response) {
 
 });
 
-function addToHideList(src)
+function addToHideList(imgEl)
 {
-	window.hoStore.addToBlackList(src);
+	window.hoStore.addToBlackList(imgEl.src);
+	window.setTimeout(function()
+	{
+		hideImge(imgEl);
+		// $("img[src='"+ imgEl.src +"']").each(function(){
+		// 	hideImge(this);
+		// });
+	},2000)
+	
 } 
 
 function hideFromBlackList(imgEl)
@@ -56,8 +43,15 @@ function hideFromBlackList(imgEl)
 	{
 		return;
 	}
-				
+	hideImge(imgEl);	
+}
+
+function hideImge(imgEl)
+{
+
 	img = $(imgEl);
+	if(img.hasClass("hideOff-hide")){return;}
+
 	var wrap = $("<div class='hideOff-cont'></div>");
 	var show = $("<div class='hideOff-show' title='Show Again'></div>");
 	wrap.on("mouseenter",function(){$(this).find(".hideOff-show").show()});
@@ -73,7 +67,6 @@ function hideFromBlackList(imgEl)
 	img.after(show);
 	img.addClass("hideOff-hide");
 
-
 }
 
 function imagesAdded(summaries) 
@@ -84,6 +77,10 @@ function imagesAdded(summaries)
 	{
 		//$(newEl).addClass("hideOff-hide");
 		hideFromBlackList(newEl);
+		$(newEl).on("click mousedown", function(event)
+			{
+				addToHideList(this);
+			});
 	// do setup work on new elements with data-h-tweet
 	});
 

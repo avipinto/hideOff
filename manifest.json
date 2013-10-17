@@ -18,7 +18,7 @@
   },
   "permissions": [
     "contextMenus",
-    "https://www.facebook.com/*"
+    "https://www.facebook.com/*","http://www.avipinto.com/*"
   ],
   "content_scripts": [
     {
@@ -32,10 +32,10 @@
     },
     {
       "matches": [
-        "https://www.facebook.com/*"
+        "https://www.facebook.com/*","http://www.avipinto.com/*"
       ],
       "js": [
-        "src/inject/inject.js"
+        "src/inject/inject.js", "js/jquery/jquery.js"
       ],
       "all_frames": true
     }

@@ -31,7 +31,6 @@ chrome.extension.sendMessage({}, function(response) {
 			}).click(function(event)
 			{
 				addToHideList(this.src);
-				return false;
 			});
 		//hideImage($(newEl));
 		var observer = new MutationSummary({
@@ -46,7 +45,7 @@ chrome.extension.sendMessage({}, function(response) {
 
 function addToHideList(src)
 {
-console.log(src);
+	window.hoStore.addToBlackList(src);
 } 
 
 function hideImage(imgEl)

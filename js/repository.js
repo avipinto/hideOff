@@ -26,7 +26,7 @@
 			var domain = 'general'; //document.domain;
 
 			var val = localStorage.getItem(domain) || '';
-			alert('got:' + val + ' from ' + domain);
+			//alert('got:' + val + ' from ' + domain);
 		  	return val;
 		},
 
@@ -37,7 +37,7 @@
 			if (items.indexOf(imageUrl)<0)
 				items = items + ' ' + imageUrl;
 			
-			alert('insert:' + imageUrl + ' under ' + domain);
+			//alert('insert:' + imageUrl + ' under ' + domain);
 			localStorage.setItem(domain, items);
 		},
 
@@ -47,7 +47,7 @@
 			domain = document.domain;
 			chrome.storage.local.get('1',function(data) {
 		    	// Notify that we saved.
-		    	alert(data.url);
+		    	//alert(data.url);
 		  	});
 		}
     };

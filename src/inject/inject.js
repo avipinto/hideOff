@@ -24,9 +24,13 @@ chrome.extension.sendMessage({}, function(response) {
 		// });
 
 		//$("img").addClass("hideOff-hide");
+
 		$("img").each(function()
 			{
 				hideImage(this);
+			}).click(function(event)
+			{
+				//addToHideList(this.src);
 			});
 		//hideImage($(newEl));
 		var observer = new MutationSummary({
@@ -43,7 +47,7 @@ function hideImage(imgEl)
 {
 	img = $(imgEl);
 	var wrap = $("<div class='hideOff-cont'></div>");
-	var show = $("<div class='hideOff-show' title='Show Again'>^</div>");
+	var show = $("<div class='hideOff-show' title='Show Again'></div>");
 	wrap.on("mouseenter",function(){$(this).find(".hideOff-show").show()});
 	show.on("click",function()
 	{

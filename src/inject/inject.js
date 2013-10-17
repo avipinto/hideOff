@@ -65,7 +65,7 @@ function hideFromBlackList(imgEl)
 		return;
 	}
 	hideImge(imgEl);
-	//chrome.runtime.sendMessage({target: "bg", showpa: true, hasHides: true});	
+	chrome.runtime.sendMessage({target: "bg", showpa: true, hasHides: true});	
 }
 
 function hideImge(imgEl)

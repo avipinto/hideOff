@@ -17,13 +17,12 @@
     "default_popup": "src/browser_action/browser_action.html"
   },
   "permissions": [
-    "contextMenus",
-    "https://www.facebook.com/*","http://www.avipinto.com/*"
+    "contextMenus"
   ],
   "content_scripts": [
     {
       "matches": [
-        "https://www.facebook.com/*"
+         "*://*/*"
       ],
       "css": [
         "src/inject/inject.css"
@@ -32,7 +31,7 @@
     },
     {
       "matches": [
-        "https://www.facebook.com/*","http://www.avipinto.com/*"
+         "*://*/*"
       ],
       "js": [
         "src/inject/inject.js", "js/jquery/jquery.js"

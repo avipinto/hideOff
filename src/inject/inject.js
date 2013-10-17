@@ -36,6 +36,8 @@ function bindImageLink(imgEl)
 	if(img.hasClass("hideOff-removedFromBlack")){return;}
 	var parentLink = img.parent("a");
 	hideFromBlackList(imgEl);
+	
+//TODO - i think the following should be in hideFromBlackList
 	img.add(parentLink).on("click.hideOff mousedown.hideOff", function(event)
 	{
 		addToHideList(self);
@@ -62,7 +64,8 @@ function hideFromBlackList(imgEl)
 	{
 		return;
 	}
-	hideImge(imgEl);	
+	hideImge(imgEl);
+	//chrome.runtime.sendMessage({target: "bg", showpa: true, hasHides: true});	
 }
 
 function hideImge(imgEl)

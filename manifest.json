@@ -5,9 +5,9 @@
   "description": "This extension will help you hide content you don't want to see anymore",
   "homepage_url": "https://github.com/avipinto/hideOff",
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "icons/sun16.png",
+    "48": "icons/sun48.png",
+    "128": "icons/sun128.png"
   },
   "default_locale": "en",
   "options_page": "src/options/index.html",
@@ -15,10 +15,6 @@
     "scripts": ["src/background/background.js"]
   },
   "page_action": {
-    "default_icon": {                  
-      "19": "icons/sun19.png"         
-    },
-    "default_title": "Clear hideOff"      // optional; shown in tooltip
   },
   "permissions": [
     "storage",

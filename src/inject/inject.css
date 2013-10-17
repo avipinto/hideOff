@@ -2,3 +2,26 @@
 {
 	opacity: 0.2 !important;
 }
+.hideOff-cont
+{
+	position: relative;
+	z-index:10;
+	overflow: hidden;
+}
+.hideOff-show
+{
+	position:absolute;
+	bottom:2px;
+	right:2px;
+	height:0px;
+	width:0px;
+	border-left: 15px solid transparent;
+	border-bottom: 15px solid gray;
+	z-index:10000;
+	cursor: pointer;
+	 display: none;
+}
+.hideOff-show img
+{
+	z-index:20;
+}

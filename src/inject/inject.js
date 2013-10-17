@@ -1,6 +1,6 @@
 var blackList = null;
 
-chrome.extension.sendMessage({}, function(response) {
+chrome.extension.sendMessage({target: "bg", showpa: false}, function(response) {
 	var readyStateCheckInterval = setInterval(function() {
 	if (document.readyState === "complete") {
 		clearInterval(readyStateCheckInterval);
@@ -111,3 +111,25 @@ function imagesAdded(summaries)
 // });
 }
 
+chrome.runtime.onMessage.addListener(
+
+
+  function(request,sender, callback) {
+    
+    if (request.target !== "inj") {
+        return;
+    }
+    
+    //Handle here event of page action click
+    
+    /*
+       To enable the page action button when there are "hides" in the page call:
+       
+      chrome.runtime.sendMessage({target: "bg", showpa: true, hasHides: true});
+
+       when no "hides" are in the page:
+       
+      chrome.runtime.sendMessage({target: "bg", showpa: true, hasHides: false});
+      
+    */
+  });

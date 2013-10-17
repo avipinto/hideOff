@@ -1,6 +1,6 @@
 var blackList = null;
 
-chrome.extension.sendMessage({target: "bg", showpa: false}, function(response) {
+chrome.extension.sendMessage({target: "first", showpa: false, hasHides: false}, function(response) {
 	var readyStateCheckInterval = setInterval(function() {
 	if (document.readyState === "complete") {
 		clearInterval(readyStateCheckInterval);
@@ -65,7 +65,7 @@ function hideFromBlackList(imgEl)
 		return;
 	}
 	hideImge(imgEl);
-	chrome.runtime.sendMessage({target: "bg", showpa: true, hasHides: true});	
+	//chrome.runtime.sendMessage({target: "bg", showpa: true, hasHides: true});	
 }
 
 function hideImge(imgEl)

@@ -8,8 +8,8 @@ chrome.pageAction.onClicked.addListener(function(tab)
  
 chrome.runtime.onMessage.addListener(
 
-  function(request,sender) {
+  function(request,sender, callback) {
     chrome.pageAction.show(sender.tab.id);
-  
+    callback({});
   } );
  

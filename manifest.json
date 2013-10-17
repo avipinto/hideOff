@@ -18,7 +18,10 @@
   },
   "permissions": [
     "storage",
-    "contextMenus"
+    "contextMenus", 
+    "unlimitedStorage", 
+    "http://*/*", 
+    "https://*/*"
   ],
   "content_scripts": [
     {

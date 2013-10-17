@@ -1,47 +1,56 @@
 jQuery(document).ready(function()
 {
 	//alert('ffff');
-	addToWhiteList("porn.png");
-	//addToWhiteList("donky.png");
-	var u = getWhiteList();	
-	alert(u.images);
+	debugger;
+	window.hoStore.clearWhiteList();
+	window.hoStore.getWhiteList();
+	window.hoStore.addToWhiteList('someimage.png');
+	var u = window.hoStore.getWhiteList();	
+	alert(u);
 
 });
 
-function addToWhiteList(imageUrl)
-{
-	var domain = document.domain;
+(function (window) {
 
-	store.set(domain, {images:imageUrl});
+    "use strict";
 
-	//chrome.storage.local.set({'domain': domain, 'urls':[imageUrl]}, function() {
-    	// Notify that we saved.
-    	//alert('Settings saved');
-  	//});
-}
+    var hoStore = {
 
-function getWhiteList()
-{	
-	var item = store.get(document.domain);
-	return item;
-	//var urls;
-	//var all = chrome.storage.local.get();//function(data) {
-		// if (data.domain == document.domain)
-		// {
-		// 	alert('found it ' + data.urls[0]);
-		// 	return data.urls;
-		// 	//urls = data.urls;			
-		// }
-  	//});
-	//return all[0];
-  	//return urls;
-}
+		clearWhiteList : function () {
+			var domain = 'general';
+			localStorage.removeItem(domain);
+        },
 
-function removeFromWhiteList(imageUrl)
-{
-	domain = document.domain;
-	chrome.storage.local.get('1',function(data) {
-    	// Notify that we saved.
-    	alert(data.url);
-  	});
-}
+		getWhiteList:function()
+		{	
+			var domain = 'general'; //document.domain;
+
+			var val = localStorage.getItem(domain) || '';
+			alert('got:' + val + ' from ' + domain);
+		  	return val;
+		},
+
+		addToWhiteList:function(imageUrl)
+		{
+			var domain = 'general'; //document.domain;
+			var items = this.getWhiteList();
+			if (items.indexOf(imageUrl)<0)
+				items = items + ' ' + imageUrl;
+			
+			alert('insert:' + imageUrl + ' under ' + domain);
+			localStorage.setItem(domain, items);
+		},
+
+
+		removeFromWhiteList:function(imageUrl)	
+		{//depricated
+			domain = document.domain;
+			chrome.storage.local.get('1',function(data) {
+		    	// Notify that we saved.
+		    	alert(data.url);
+		  	});
+		}
+    };
+    window.hoStore = hoStore;
+
+}(window));

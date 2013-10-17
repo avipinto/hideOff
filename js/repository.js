@@ -47,7 +47,7 @@
 			domain = document.domain;
 			chrome.storage.local.get('1',function(data) {
 		    	// Notify that we saved.
-		    	//alert(data.url);
+		    	//	(data.url);
 		  	});
 		}
     };

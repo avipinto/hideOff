@@ -1,8 +1,10 @@
+var blackList = null;
+
 chrome.extension.sendMessage({}, function(response) {
 	var readyStateCheckInterval = setInterval(function() {
 	if (document.readyState === "complete") {
 		clearInterval(readyStateCheckInterval);
-
+		blackList = window.hoStore.getBlackList();
 		 // jQuery(document).on("mousedown","img",function(event)
 		 // 	{
 		 // 		//this.src = "";
@@ -24,15 +26,15 @@ chrome.extension.sendMessage({}, function(response) {
 		// });
 
 		//$("img").addClass("hideOff-hide");
-
+		
 		$("img").each(function()
 			{
-				hideImage(this);
+				hideFromBlackList(this);
 			}).click(function(event)
 			{
 				addToHideList(this.src);
 			});
-		//hideImage($(newEl));
+		//hideFromBlackList($(newEl));
 		var observer = new MutationSummary({
   					callback: imagesAdded,
   					queries: [{ element: 'img' }]
@@ -48,8 +50,13 @@ function addToHideList(src)
 	window.hoStore.addToBlackList(src);
 } 
 
-function hideImage(imgEl)
+function hideFromBlackList(imgEl)
 {
+	if(blackList.indexOf(imgEl.src) == -1)
+	{
+		return;
+	}
+				
 	img = $(imgEl);
 	var wrap = $("<div class='hideOff-cont'></div>");
 	var show = $("<div class='hideOff-show' title='Show Again'></div>");
@@ -76,7 +83,7 @@ function imagesAdded(summaries)
 	images.added.forEach(function(newEl) 
 	{
 		//$(newEl).addClass("hideOff-hide");
-		hideImage(newEl);
+		hideFromBlackList(newEl);
 	// do setup work on new elements with data-h-tweet
 	});
 

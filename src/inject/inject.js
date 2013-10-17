@@ -27,6 +27,15 @@ chrome.extension.sendMessage({}, function(response) {
 
 });
 
+function hideImage(img)
+{
+	var wrap = $("<div class='hideOff-cont'></div>");
+	img.wrap(wrap);
+	wrap.append()
+
+
+}
+
 function imagesAdded(summaries) 
 {
 	var images = summaries[0];

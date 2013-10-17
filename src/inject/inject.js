@@ -6,13 +6,18 @@ chrome.extension.sendMessage({}, function(response) {
 		clearInterval(readyStateCheckInterval);
 		blackList = window.hoStore.getBlackList();
 		
+		// $("img").each(function()
+		// 	{
+		// 		hideFromBlackList(this);
+		// 	}).on("click mousedown", function(event)
+		// 	{
+		// 		addToHideList(this);
+		// 	});
 		$("img").each(function()
-			{
-				hideFromBlackList(this);
-			}).on("click mousedown", function(event)
-			{
-				addToHideList(this);
-			});
+		{
+			bindImageLink(this);
+		});
+
 		//hideFromBlackList($(newEl));
 		var observer = new MutationSummary({
   					callback: imagesAdded,
@@ -23,6 +28,19 @@ chrome.extension.sendMessage({}, function(response) {
 
 
 });
+
+function bindImageLink(imgEl)
+{
+	var self = imgEl;
+	var img = $(imgEl);
+	var parentLink = img.parent("a");
+	hideFromBlackList(imgEl);
+	img.add(parentLink).on("click mousedown", function(event)
+	{
+		addToHideList(self);
+	});
+
+}
 
 function addToHideList(imgEl)
 {
@@ -55,10 +73,12 @@ function hideImge(imgEl)
 	var wrap = $("<div class='hideOff-cont'></div>");
 	var show = $("<div class='hideOff-show' title='Show Again'></div>");
 	wrap.on("mouseenter",function(){$(this).find(".hideOff-show").show()});
+	wrap.on("mouseleave",function(){$(this).find(".hideOff-show").hide()});
 	show.on("click",function()
 	{
 		$(this).siblings("img").removeClass("hideOff-hide");
 		$(this).remove();
+		window.hoStore.removeFromBlackList(imgEl.src);
 		return false;
 	});
 	wrap.width(img.width());
@@ -75,12 +95,7 @@ function imagesAdded(summaries)
 
 	images.added.forEach(function(newEl) 
 	{
-		//$(newEl).addClass("hideOff-hide");
-		hideFromBlackList(newEl);
-		$(newEl).on("click mousedown", function(event)
-			{
-				addToHideList(this);
-			});
+		bindImageLink(newEl)
 	// do setup work on new elements with data-h-tweet
 	});
 

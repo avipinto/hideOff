@@ -48,13 +48,13 @@ function bindImageLink(imgEl)
 function addToHideList(imgEl)
 {
 	window.hoStore.addToBlackList(imgEl.src);
-	window.setTimeout(function()
-	{
-		hideImge(imgEl);
+	// window.setTimeout(function()
+	// {
+	//	hideImge(imgEl);
 		// $("img[src='"+ imgEl.src +"']").each(function(){
 		// 	hideImge(this);
 		// });
-	},2000)
+	//},2000)
 	
 } 
 

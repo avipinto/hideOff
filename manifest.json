@@ -17,6 +17,7 @@
     "default_popup": "src/browser_action/browser_action.html"
   },
   "permissions": [
+    "storage",
     "contextMenus"
   ],
   "content_scripts": [
@@ -36,7 +37,8 @@
       "js": [
         "src/inject/inject.js", 
         "js/jquery/jquery.js",
-        "js/mutation-summary.js"
+        "js/mutation-summary.js",
+        "src/Storage/store.js"
       ],
       "all_frames": true
     }

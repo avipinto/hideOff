@@ -45,7 +45,7 @@
         "src/inject/inject.js", 
         "js/jquery/jquery.js",
         "js/mutation-summary.js",
-        "src/Storage/repository.js"
+        "js/repository.js"
       ],
       "all_frames": true
     }

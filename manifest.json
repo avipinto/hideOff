@@ -34,7 +34,9 @@
          "*://*/*"
       ],
       "js": [
-        "src/inject/inject.js", "js/jquery/jquery.js"
+        "src/inject/inject.js", 
+        "js/jquery/jquery.js",
+        "js/mutation-summary.js"
       ],
       "all_frames": true
     }

@@ -44,6 +44,8 @@
 
 		removeFromBlackList:function(imageUrl)	
 		{
+			//debugger;
+			var domain = 'general'; //document.domain;
 			var items = this.getBlackList();
 			if (items.indexOf(imageUrl)>=0)
 			{

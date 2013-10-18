@@ -23,15 +23,14 @@ chrome.extension.sendMessage({target: "bgfirst"}, function(response) {
 
 function bindImageLink(imgEl)
 {
-	var self = imgEl;
 	var img = $(imgEl);
 	if(img.hasClass("hideOff-removedFromBlack")){return;}
 	hideFromBlackList(img);
 }
 
-function addToHideList(imgEl)
+function addToHideList(img)
 {
-	window.hoStore.addToBlackList(imgEl.src);
+	window.hoStore.addToBlackList(img.get(0).src);
 	// window.setTimeout(function()
 	// {
 	//	hideImge(imgEl);
@@ -53,7 +52,7 @@ function hideFromBlackList(img)
 		var parentLink = img.parent("a");
 		img.add(parentLink).on("click.hideOff mousedown.hideOff", function(event)
 		{
-			addToHideList(self);
+			addToHideList(img);
 		});
 	}
 	

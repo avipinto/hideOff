@@ -1,7 +1,13 @@
 .hideOff-hide
 {
-	opacity: 0.2 !important;
+	opacity: 0.4 !important;
 }
+
+.hideOff-hide-forever
+{
+	opacity: 0.1 !important;
+}
+
 .hideOff-cont
 {
 	position: relative;
@@ -26,16 +32,8 @@
 	z-index:20;
 }
 
-.hideOffDarker-hide
-{
-	opacity: 0.1 !important;
-}
-.hideOffDarker-cont
-{
-	position: relative;
-	z-index:10;
-	overflow: hidden;
-}
+
+
 .hideOffDarker-show
 {
 	position:absolute;
@@ -48,8 +46,4 @@
 	z-index:10000;
 	cursor: pointer;
 	 display: none;
-}
-.hideOffDarker-show img
-{
-	z-index:20;
 }

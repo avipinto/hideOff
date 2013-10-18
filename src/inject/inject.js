@@ -6,19 +6,11 @@ chrome.extension.sendMessage({target: "first", showpa: false, hasHides: false}, 
 		clearInterval(readyStateCheckInterval);
 		blackList = window.hoStore.getBlackList();
 		
-		// $("img").each(function()
-		// 	{
-		// 		hideFromBlackList(this);
-		// 	}).on("click mousedown", function(event)
-		// 	{
-		// 		addToHideList(this);
-		// 	});
 		$("img").each(function()
 		{
 			bindImageLink(this);
 		});
 
-		//hideFromBlackList($(newEl));
 		var observer = new MutationSummary({
   					callback: imagesAdded,
   					queries: [{ element: 'img' }]
@@ -34,15 +26,7 @@ function bindImageLink(imgEl)
 	var self = imgEl;
 	var img = $(imgEl);
 	if(img.hasClass("hideOff-removedFromBlack")){return;}
-	var parentLink = img.parent("a");
-	hideFromBlackList(imgEl);
-	
-//TODO - i think the following should be in hideFromBlackList
-	img.add(parentLink).on("click.hideOff mousedown.hideOff", function(event)
-	{
-		addToHideList(self);
-	});
-
+	hideFromBlackList(img);
 }
 
 function addToHideList(imgEl)
@@ -58,20 +42,27 @@ function addToHideList(imgEl)
 	
 } 
 
-function hideFromBlackList(imgEl)
+function hideFromBlackList(img)
 {
-	if(blackList.indexOf(imgEl.src) == -1)
+	if(blackList.indexOf(img.get(0).src) >= -1)
 	{
-		return;
+		hideImge(img);
 	}
-	hideImge(imgEl);
+	else
+	{
+		var parentLink = img.parent("a");
+		img.add(parentLink).on("click.hideOff mousedown.hideOff", function(event)
+		{
+			addToHideList(self);
+		});
+	}
+	
 	//chrome.runtime.sendMessage({target: "bg", showpa: true, hasHides: true});	
 }
 
-function hideImge(imgEl)
+function hideImge(img)
 {
 
-	img = $(imgEl);
 	if(img.is(".hideOff-hide,.hideOff-removedFromBlack")){return;}
 
 	var wrap = $("<div class='hideOff-cont'></div>");

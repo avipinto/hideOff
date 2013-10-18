@@ -44,7 +44,7 @@ function addToHideList(imgEl)
 
 function hideFromBlackList(img)
 {
-	if(blackList.indexOf(img.get(0).src) >= -1)
+	if(blackList.indexOf(img.get(0).src) >= 0)
 	{
 		hideImge(img);
 	}
